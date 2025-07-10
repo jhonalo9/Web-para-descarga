@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Flex - Aprende a cocinar fácilmente</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rubik', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 1.5rem 1rem;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #28a745;
+      text-decoration: none;
+    }
+
+    .logo-text span {
+      color: #ff6b6b;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #28a745;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #28a745;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      height: 80vh;
+      max-height: 700px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .boton-descarga {
+      background-color: #34ed06;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      transition: all 0.3s;
+      display: inline-block;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(107, 255, 161, 0.4);
+      border: none;
+      cursor: pointer;
+    }
+
+    .boton-descarga:hover {
+      background-color: #34ed06;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(4, 240, 67, 0.6);
+    }
+
+    .boton-descarga:active {
+      transform: translateY(1px);
+    }
+
+    .features {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #28a745;
+      font-size: 2.2rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #ff6b6b;
+      margin: 15px auto;
+      border-radius: 2px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      color: #28a745;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .feature-card p {
+      color: #666;
+    }
+
+    .recetas {
+      background-color: #f1f8e9;
+      padding: 5rem 2rem;
+    }
+
+    .recetas-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .recetas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .receta-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+    }
+
+    .receta-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .receta-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .receta-content {
+      padding: 1.5rem;
+    }
+
+    .receta-content h3 {
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .receta-content p {
+      color: #666;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .receta-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #888;
+      font-size: 0.8rem;
+    }
+
+    .testimonios {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonio-card {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .testimonio-card::before {
+      content: '"';
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 5rem;
+      color: rgba(40, 167, 69, 0.1);
+      font-family: serif;
+      line-height: 1;
+    }
+
+    .testimonio-text {
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      color: #555;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonio-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .author-info h4 {
+      color: #333;
+      margin-bottom: 0.2rem;
+    }
+
+    .author-info p {
+      color: #888;
+      font-size: 0.8rem;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #28a745 0%, #7bed9f 100%);
+      padding: 5rem 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta p {
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+    }
+
+    .boton-descarga.blanco {
+      background-color: white;
+      color: #28a745;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .boton-descarga.blanco:hover {
+      background-color: #f8f9fa;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 4rem 2rem 2rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .footer-logo span {
+      color: #ff6b6b;
+    }
+
+    .footer-about p {
+      margin-bottom: 1.5rem;
+      color: #bbb;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #ff6b6b;
+    }
+
+    .footer-links h3 {
+      color: white;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: #bbb;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-newsletter p {
+      color: #bbb;
+      margin-bottom: 1.5rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      font-family: inherit;
+    }
+
+    .newsletter-form button {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 0 1.2rem;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .newsletter-form button:hover {
+      background-color: #ff5252;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid #444;
+      color: #bbb;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.6s;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Food Flex Logo" class="logo">
+        <a href="#" class="logo-text">Food<span>Flex</span></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#features">Características</a></li>
+          <li><a href="#recetas">Recetas</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#descarga">Descargar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <video autoplay muted loop class="hero-video">
+      <source src="https://media.istockphoto.com/id/1249014211/es/v%C3%ADdeo/una-joven-pide-comida-en-l%C3%ADnea-usando-un-tel%C3%A9fono-inteligente-ella-est%C3%A1-sentada-en-su-cocina.mp4?s=mp4-640x640-is&k=20&c=XUMnUS4wao9qho8mXeqHtLLTQJLgMVNe4DDimIPX7d4=" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <h1 class="fade-in">Domina la cocina sin complicaciones</h1>
+      <p class="fade-in delay-1">La app que transforma a principiantes en chefs caseros con recetas fáciles, rápidas y deliciosas</p>
+      <a href="app-release.apk" class="boton-descarga fade-in delay-2">Descargar Ahora</a>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <h2 class="section-title">¿Por qué elegir Food Flex?</h2>
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>Recetas rápidas</h3>
+        <p>Platos deliciosos en menos de 30 minutos, perfectos para tu estilo de vida ocupado.</p>
+      </div>
+      <div class="feature-card fade-in delay-1">
+        <div class="feature-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>Aprendizaje paso a paso</h3>
+        <p>Videos tutoriales y guías detalladas para cada receta, incluso para principiantes absolutos.</p>
+      </div>
+      <div class="feature-card fade-in delay-2">
+        <div class="feature-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3>Saludable y delicioso</h3>
+        <p>Comidas balanceadas que cuidan tu salud sin sacrificar el sabor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="recetas" id="recetas">
+    <div class="recetas-container">
+      <h2 class="section-title">Recetas populares</h2>
+      <div class="recetas-grid">
+        <div class="receta-card fade-in">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Ensalada saludable" class="receta-img">
+          <div class="receta-content">
+            <h3>Ensalada de quinoa</h3>
+            <p>Fresca, nutritiva y llena de proteínas, perfecta para un almuerzo ligero.</p>
+            <div class="receta-meta">
+              <span><i class="fas fa-clock"></i> 25 min</span>
+              <span><i class="fas fa-utensils"></i> Fácil</span>
+            </div>
+          </div>
+        </div>
+        <div class="receta-card fade-in delay-1">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Pasta" class="receta-img">
+          <div class="receta-content">
+            <h3>Pasta primavera</h3>
+            <p>Vegetales frescos con pasta al dente en una salsa cremosa de limón.</p>
+            <div class="receta-meta">
+              <span><i class="fas fa-clock"></i> 20 min</span>
+              <span><i class="fas fa-utensils"></i> Fácil</span>
+            </div>
+          </div>
+        </div>
+        <div class="receta-card fade-in delay-2">
+          <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="Panqueques" class="receta-img">
+          <div class="receta-content">
+            <h3>Panqueques esponjosos</h3>
+            <p>Desayuno perfecto con solo 5 ingredientes básicos que todos tienen.</p>
+            <div class="receta-meta">
+              <span><i class="fas fa-clock"></i> 15 min</span>
+              <span><i class="fas fa-utensils"></i> Fácil</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonios" id="testimonios">
+    <h2 class="section-title">Lo que dicen nuestros usuarios</h2>
+    <div class="testimonios-grid">
+      <div class="testimonio-card fade-in">
+        <p class="testimonio-text">"Antes de Food Flex vivía a base de comida rápida. Ahora preparo mis propias comidas y hasta invito a amigos. ¡Nunca pensé que cocinar podría ser tan fácil y divertido!"</p>
+        <div class="testimonio-author">
+          <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="María González" class="author-avatar">
+          <div class="author-info">
+            <h4>María González</h4>
+            <p>Usuaria desde 2024</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio-card fade-in delay-1">
+        <p class="testimonio-text">"Como estudiante con poco tiempo y menos dinero, Food Flex ha sido un salvavidas. Las recetas son rápidas, económicas y mucho más saludables que lo que solía comer."</p>
+        <div class="testimonio-author">
+          <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Martínez" class="author-avatar">
+          <div class="author-info">
+            <h4>Carlos Martínez</h4>
+            <p>Estudiante universitario</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio-card fade-in delay-2">
+        <p class="testimonio-text">"Me encanta cómo las recetas se adaptan a lo que tengo en la nevera. La función de sustitutos de ingredientes es genial para cuando no puedo salir a comprar."</p>
+        <div class="testimonio-author">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ana Rodríguez" class="author-avatar">
+          <div class="author-info">
+            <h4>Ana Rodríguez</h4>
+            <p>Madre de dos niños</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="descarga">
+    <div class="cta-container">
+      <h2 class="fade-in">¿Listo para transformar tu cocina?</h2>
+      <p class="fade-in delay-1">Descarga Food Flex ahora y descubre lo fácil y divertido que puede ser cocinar</p>
+      <a href="app-release.apk" download class="boton-descarga blanco fade-in delay-2">
+        <i class="fas fa-download"></i> Descargar para Android
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <a href="#" class="footer-logo">Food<span>Flex</span></a>
+        <p>La app que transforma a principiantes en chefs caseros con recetas fáciles, rápidas y deliciosas.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Enlaces rápidos</h3>
+        <ul>
+          <li><a href="#features">Características</a></li>
+          <li><a href="#recetas">Recetas</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#descarga">Descargar</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Términos de servicio</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter">
+        
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 Food Flex. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Efecto de aparición al hacer scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElements.forEach(el => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        fadeObserver.observe(el);
+      });
+      
+      // Smooth scrolling para los enlaces del menú
+      document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if(targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if(targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
